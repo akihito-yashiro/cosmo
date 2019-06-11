@@ -1,0 +1,150 @@
+// stylelint-disable declaration-no-important
+
+// Margin and Padding
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @each $prop, $abbrev in (margin: m, padding: p) {
+
+
+      // @each $size, $length in $spacers {
+      //   .#{$abbrev}#{$infix}-#{$size} { #{$prop}: $length !important; }
+      //   .#{$abbrev}t#{$infix}-#{$size},
+      //   .#{$abbrev}y#{$infix}-#{$size} {
+      //     #{$prop}-top: $length !important;
+      //   }
+      //   .#{$abbrev}r#{$infix}-#{$size},
+      //   .#{$abbrev}x#{$infix}-#{$size} {
+      //     #{$prop}-right: $length !important;
+      //   }
+      //   .#{$abbrev}b#{$infix}-#{$size},
+      //   .#{$abbrev}y#{$infix}-#{$size} {
+      //     #{$prop}-bottom: $length !important;
+      //   }
+      //   .#{$abbrev}l#{$infix}-#{$size},
+      //   .#{$abbrev}x#{$infix}-#{$size} {
+      //     #{$prop}-left: $length !important;
+      //   }
+      // }
+
+      // %設定
+      @for $i from 0 through 100 {
+        .#{$abbrev}#{$infix}-#{$i}p { #{$prop}: #{$i}%!important; }
+        .#{$abbrev}t#{$infix}-#{$i}p,
+        .#{$abbrev}y#{$infix}-#{$i}p {
+          #{$prop}-top: #{$i}%!important;
+        }
+        .#{$abbrev}r#{$infix}-#{$i}p,
+        .#{$abbrev}x#{$infix}-#{$i}p {
+          #{$prop}-right: #{$i}%!important;
+        }
+        .#{$abbrev}b#{$infix}-#{$i}p,
+        .#{$abbrev}y#{$infix}-#{$i}p {
+          #{$prop}-bottom: #{$i}%!important;
+        }
+        .#{$abbrev}l#{$infix}-#{$i}p,
+        .#{$abbrev}x#{$infix}-#{$i}p {
+          #{$prop}-left: #{$i}%!important;
+        }
+      }
+
+      // px設定 200pxまで
+      @for $i from 0 through 200 {
+        .#{$abbrev}#{$infix}-#{$i}px { #{$prop}: #{$i}px!important; }
+        .#{$abbrev}t#{$infix}-#{$i}px,
+        .#{$abbrev}y#{$infix}-#{$i}px {
+          #{$prop}-top: #{$i}px!important;
+        }
+        .#{$abbrev}r#{$infix}-#{$i}px,
+        .#{$abbrev}x#{$infix}-#{$i}px {
+          #{$prop}-right: #{$i}px!important;
+        }
+        .#{$abbrev}b#{$infix}-#{$i}px,
+        .#{$abbrev}y#{$infix}-#{$i}px {
+          #{$prop}-bottom: #{$i}px!important;
+        }
+        .#{$abbrev}l#{$infix}-#{$i}px,
+        .#{$abbrev}x#{$infix}-#{$i}px {
+          #{$prop}-left: #{$i}px!important;
+        }
+      }
+
+
+    }
+    // マイナス　px設定 200pxまで
+    @for $i from 1 through 200 {
+        .m#{$infix}-n#{$i} { margin: -#{$i}px !important; }
+        .mt#{$infix}-n#{$i},
+        .my#{$infix}-n#{$i} {
+            margin-top: -#{$i}px !important;
+        }
+        .mr#{$infix}-n#{$i},
+        .mx#{$infix}-n#{$i} {
+            margin-right: -#{$i}px !important;
+        }
+        .mb#{$infix}-n#{$i},
+        .my#{$infix}-n#{$i} {
+            margin-bottom: -#{$i}px !important;
+        }
+        .ml#{$infix}-n#{$i},
+        .mx#{$infix}-n#{$i} {
+            margin-left: -#{$i}px !important;
+        }
+    }
+
+    // Negative margins (e.g., where `.mb-n1` is negative version of `.mb-1`)
+    // @each $size, $length in $spacers {
+    //   @if $size != 0 {
+    //     .m#{$infix}-n#{$size} { margin: -$length !important; }
+    //     .mt#{$infix}-n#{$size},
+    //     .my#{$infix}-n#{$size} {
+    //       margin-top: -$length !important;
+    //     }
+    //     .mr#{$infix}-n#{$size},
+    //     .mx#{$infix}-n#{$size} {
+    //       margin-right: -$length !important;
+    //     }
+    //     .mb#{$infix}-n#{$size},
+    //     .my#{$infix}-n#{$size} {
+    //       margin-bottom: -$length !important;
+    //     }
+    //     .ml#{$infix}-n#{$size},
+    //     .mx#{$infix}-n#{$size} {
+    //       margin-left: -$length !important;
+    //     }
+    //   }
+    // }
+
+    // Some special margin utils
+    .m#{$infix}-auto { margin: auto !important; }
+    .mt#{$infix}-auto,
+    .my#{$infix}-auto {
+      margin-top: auto !important;
+    }
+    .mr#{$infix}-auto,
+    .mx#{$infix}-auto {
+      margin-right: auto !important;
+    }
+    .mb#{$infix}-auto,
+    .my#{$infix}-auto {
+      margin-bottom: auto !important;
+    }
+    .ml#{$infix}-auto,
+    .mx#{$infix}-auto {
+      margin-left: auto !important;
+    }
+
+    //ie対応
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        @for $i from 0 through 30 {
+          .pt-ie#{$infix}-#{$i}px {
+              padding-top: 1px * $i;
+              }
+        }
+    }
+
+
+  }
+}

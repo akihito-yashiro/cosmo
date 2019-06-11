@@ -1,0 +1,53 @@
+// stylelint-disable declaration-no-important
+
+// Width and height
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @each $prop, $abbrev in (width: w, height: h) {
+
+      // @each $size, $length in $sizes {
+      //   .#{$abbrev}#{$infix}-#{$size} { #{$prop}: $length !important; }
+      // }
+
+      // %で設定
+      @for $i from 0 through 100 {
+          .#{$abbrev}#{$infix}-#{$i}p{
+              #{$prop}: #{$i}% !important;
+          }
+      }
+      // %で設定
+      @for $i from 0 through 100 {
+          .#{$abbrev}#{$infix}-#{$i}vh{
+              #{$prop}: #{$i}vh !important;
+          }
+      }
+      @for $i from 0 through 100 {
+          .#{$abbrev}#{$infix}-#{$i}vw{
+              #{$prop}: #{$i}vw !important;
+          }
+      }
+      // pxで設定
+      @for $i from 0 through 1000 {
+          .#{$abbrev}#{$infix}-#{$i}px {
+              #{$prop}: #{$i}px !important;
+          }
+      }
+
+    }
+    .max-w#{$infix}-100p { max-width: 100% !important; }
+    .max-h#{$infix}-100p { max-height: 100% !important; }
+    .min-w#{$infix}-100p { max-width: 100% !important; }
+    .min-h#{$infix}-100p { max-height: 100% !important; }
+  }
+}
+
+
+// Viewport additional helpers
+
+.min-vw-100 { min-width: 100vw !important; }
+.min-vh-100 { min-height: 100vh !important; }
+
+.vw-100 { width: 100vw !important; }
+.vh-100 { height: 100vh !important; }

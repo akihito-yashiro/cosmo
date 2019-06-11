@@ -1,0 +1,94 @@
+// Container widths
+//
+// Set the container width, and override it for fixed navbars in media queries.
+
+@if $enable-grid-classes {
+  .container {
+    @include make-container();
+    @include make-container-max-widths();
+  }
+}
+
+// Fluid container
+//
+// Utilizes the mixin meant for fixed width containers, but with 100% width for
+// fluid, full width layouts.
+
+@if $enable-grid-classes {
+  .container-fluid {
+    @include make-container();
+  }
+}
+
+// Row
+//
+// Rows contain and clear the floats of your columns.
+
+@if $enable-grid-classes {
+  .row {
+    @include make-row();
+  }
+
+  // Remove the negative margin from default .row, then the horizontal padding
+  // from all immediate children columns (to prevent runaway style inheritance).
+  .no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+
+    > .col,
+    > [class*="col-"] {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+// Columns
+//
+// Common styles for small and large grid columns
+
+@if $enable-grid-classes {
+  @include make-grid-columns();
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+        //gutterの設定 px　（100pxまで）
+        @for $i from 1 through 100 {
+          .g#{$infix}-#{$i}px {
+              margin-left: -1px * $i;
+              margin-right: -1px * $i;
+              > .col,
+              > [class*="col-"] {
+                padding-right: 1px * $i;
+                padding-left: 1px * $i;
+              }
+
+              }
+          .g#{$infix}-#{$i}px > div {
+              padding-left: 1px * $i ;
+              padding-right: 1px * $i ;
+              }
+        }
+        //gutterの設定 % （50%まで）
+        @for $i from 1 through 50 {
+          .g#{$infix}-#{$i}p {
+              margin-left: -1% * $i;
+              margin-right: -1% * $i;
+              > .col,
+              > [class*="col-"] {
+                padding-right: 1% * $i;
+                padding-left: 1% * $i;
+              }
+
+              }
+          .g#{$infix}-#{$i}p > div {
+              padding-left: 1% * $i ;
+              padding-right: 1% * $i ;
+              }
+        }
+
+    }
+}

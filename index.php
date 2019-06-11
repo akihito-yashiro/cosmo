@@ -2,7 +2,6 @@
 $path = dirname( __FILE__);
 
 ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 
